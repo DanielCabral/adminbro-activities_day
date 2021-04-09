@@ -30,7 +30,7 @@ module.exports = Object.freeze({
     appVersion: 'App: {{version}}',
     loginWelcome: 'Bem vindo',
     'Product': "Produtos",
-    Project: 'Meus Projects'
+    Activity: 'Atividades Diarias'
   },
   // properties: {
   //   'active': 'Ativo',

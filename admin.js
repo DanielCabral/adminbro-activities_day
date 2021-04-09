@@ -3,17 +3,18 @@
 const translations = require("./pt-br.js");
 const mongoose = require("mongoose");
 
-const ProjectSchema = new mongoose.Schema({
-  title: {
+const ActivitieSchema = new mongoose.Schema({
+  data:  { type: Date, default: Date.now },
+  horario_de_entrada: { type: Date, default: new Date().getTime() },
+  atividades: {
     type:String,
     required: true,
   },
-  description: String,
-  completed: Boolean,
-  created_at: { type: Date, default: Date.now },
+  observações: String,
+  horario_de_saida: { type: Date, default: new Date().getTime() },
 });
 
-const Project = mongoose.model("Project", ProjectSchema);
+const Activity = mongoose.model("Activity", ActivitieSchema);
 
 // ============================================
 // Admin Bro
@@ -26,12 +27,17 @@ AdminBro.registerAdapter(AdminBroMongoose)
 
 // config
 const adminBroOptions = new AdminBro({
+  branding: {
+    companyName: 'Registro de atividades - Colegio Mater Christi',
+    logo: 'https://colegiomaterchristi.com.br/wp-content/themes/babykids/include/images/MATER.png',
+    favicon: 'https://colegiomaterchristi.com.br/wp-content/uploads/2018/06/mater_EtV_icon.ico'
+  },
 	resources: [
-    { resource: Project, options: {
+    { resource: Activity, options: {
       properties: {
-        description: { type: 'richtext' },
-        created_at: {
-          isVisible: { edit: false, list: true, show: true, filter: true }
+        atividades: { type: 'richtext' },
+        id: {
+          show: false, view: false, edit: false, filter: false,
         }
       }
    }},
