@@ -36,9 +36,6 @@ const adminBroOptions = new AdminBro({
     { resource: Activity, options: {
       properties: {
         atividades: { type: 'richtext' },
-        id: {
-          show: false, view: false, edit: false, filter: false,
-        }
       }
    }},
   ],
