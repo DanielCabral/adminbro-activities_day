@@ -1,6 +1,7 @@
 // ============================================
 // Database
 const translations = require("./pt-br.js");
+const theme = require('admin-bro-theme-dark')
 const mongoose = require("mongoose");
 
 const ActivitieSchema = new mongoose.Schema({
@@ -16,6 +17,22 @@ const ActivitieSchema = new mongoose.Schema({
 
 const Activity = mongoose.model("Activity", ActivitieSchema);
 
+const UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+  },
+  encryptedPassword: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'member'],
+    required: true
+  }
+})
+const User = mongoose.model('User',UserSchema)
 // ============================================
 // Admin Bro
 const AdminBro = require('admin-bro')
@@ -28,6 +45,7 @@ AdminBro.registerAdapter(AdminBroMongoose)
 // config
 const adminBroOptions = new AdminBro({
   branding: {
+    theme,
     companyName: 'Registro de atividades - Colegio Mater Christi',
     logo: 'https://colegiomaterchristi.com.br/wp-content/themes/babykids/include/images/MATER.png',
     favicon: 'https://colegiomaterchristi.com.br/wp-content/uploads/2018/06/mater_EtV_icon.ico'
@@ -38,6 +56,7 @@ const adminBroOptions = new AdminBro({
         atividades: { type: 'richtext' },
       }
    }},
+   User
   ],
   locale: {
     translations: {
@@ -60,12 +79,12 @@ server
 // =============================================
 // Run App
 const run = async () => {
-  await mongoose.connect("mongodb+srv://CBSOUZA2020:CBSOUZA2020@cluster0.bwekm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+  await mongoose.connect("mongodb+srv://CBSOUZA2020:CBSOUZA_2020@cluster0.bwekm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true
   });
-
-  await server.listen(5500, () => console.log("Server started"));
+  const port = process.env.PORT || 5000;
+  await server.listen(port, () => console.log("Server started"));
 }
 
 run()

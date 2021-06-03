@@ -7,6 +7,8 @@
     "@admin-bro/express": "^3.1.0",
     "@admin-bro/mongoose": "^1.1.0",
     "admin-bro": "^3.4.0",
+    "admin-bro-theme-dark": "^1.0.0",
+    "dotenv-safe": "^8.2.0",
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.1",
@@ -15,7 +17,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "yarn bundle && firebase deploy --only functions && rm .adminbro/bundle.js"
   },
   "repository": {
     "type": "git",
