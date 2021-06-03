@@ -17,6 +17,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "bundle": "node node_modules/admin-bro/bin/watch-dev.js",
     "start": "node admin.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "yarn bundle && firebase deploy --only functions && rm .adminbro/bundle.js"
